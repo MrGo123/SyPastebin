@@ -2,10 +2,7 @@ package top.zy68.Controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName SaveController
@@ -30,11 +27,15 @@ public class SaveController {
 
     /**
      * Handling the data from frontend by ajax
-     * @param code
+     *
+     * @param pasteCode
      */
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public void getPasteData(@RequestParam(value = "paste_code") String code) {
-        System.out.println(code);
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    @ResponseBody
+    public String getPasteData(@RequestParam(value = "pasteCode") String pasteCode,
+                               @RequestParam(value = "saveTime") int saveTime) {
+        System.out.println(pasteCode + saveTime);
 
+        return "http://localhost:8080/show.html";
     }
 }

@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>SyPastebin</title>
     <link rel="stylesheet" href="css/indexCss.css">
     <script src="js/indexScript.js"></script>
+    <script src="script/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#generate_btn").click(function () {
+                var pasteCode = $("#paste_code").val();
+                var saveTime = $("#select_save_time option:selected").val();
+                $.ajax({
+                    url: "/save",
+                    type: "post",
+                    dataType: "html",
+                    data: {
+                        "pasteCode": pasteCode,
+                        "saveTime": saveTime
+                    },
+                    success: function (msg) {
+                        $("#res").html(msg);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
+
 <body>
 <div style="text-align: center">
-    <h2>hello SyPastebin</h2>
+    <h2>welcome SyPastebin</h2>
 </div>
 
 <!--点击Generate，进行生成url，而本页面不动。通过ajax返回url并显示出来-->
@@ -19,16 +42,28 @@
     <input id="paste_code" name="paste_code" type="text">
 
     <!--下拉选择保存时间-->
-    <input id="save_time" name="save_time" type="text">
+    <select id="select_save_time" name="select_save_time">
+        <option id="time1" value="1" selected>不过期</option>
+        <option id="time2" value="2">一天</option>
+        <option id="time3" value="3">两天</option>
+        <option id="time4" value="4">一周</option>
+        <option id="time5" value="5">一个月</option>
+    </select>
 
-    <input type="submit" id="submit" name="save" value="Generate">
+    <button id="generate_btn" name="generate">生成</button>
+
 </div>
 
 <!--ajax取得生成的url，并显示在下面，作为一个link给用户访问-->
 
-<div>
-    请访问生成的url：<a></a>
+<!--todo这部分可先隐藏，生成url再显示-->
+<div style="text-align: center">
+    生成的url：
+    <p id="res"></p>
+    <button>访问</button>
+    <button>复制</button>
 </div>
 
 </body>
+
 </html>
