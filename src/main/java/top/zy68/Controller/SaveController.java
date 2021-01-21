@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName SaveController
- * @Description TODO
- * @Author sustart
+ * @Description Save paste code controller
+ * @Author Sustart
  * @Date2021/1/21 14:41
  * @Version 1.0
  **/
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class SaveController {
 
     /**
-     * Main page controller
+     * home page controller
      * Mapping to index.html
      *
      * @return
@@ -34,7 +34,10 @@ public class SaveController {
     @ResponseBody
     public String getPasteData(@RequestParam(value = "pasteCode") String pasteCode,
                                @RequestParam(value = "saveTime") int saveTime) {
+
         System.out.println(pasteCode + saveTime);
+
+        //这里一大堆对数据的处理及生成
 
         return "http://localhost:8080/show.html";
     }
