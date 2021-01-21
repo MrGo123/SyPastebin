@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SyPastebin</title>
+    <link rel="stylesheet" href="css/indexCss.css">
+    <script src="js/indexScript.js"></script>
+</head>
+<body>
+<div style="text-align: center">
+    <h2>hello SyPastebin</h2>
+</div>
+
+<!--点击Generate，进行生成url，而本页面不动。通过ajax返回url并显示出来-->
+<!--由js的ajax实现提交数据到后台-->
+
+<div style="text-align: center">
+
+    <input id="paste_code" name="paste_code" type="text">
+
+    <!--下拉选择保存时间-->
+    <input id="save_time" name="save_time" type="text">
+
+    <input type="submit" id="submit" name="save" value="Generate">
+</div>
+
+<!--ajax取得生成的url，并显示在下面，作为一个link给用户访问-->
+
+<div>
+    请访问生成的url：<a></a>
+</div>
+
+</body>
+</html>
