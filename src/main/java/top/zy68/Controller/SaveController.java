@@ -39,6 +39,6 @@ public class SaveController {
 
         //这里一大堆对数据的处理及生成
 
-        return "http://localhost:8080/show.html";
+        return pasteCode+saveTime;
     }
 }
