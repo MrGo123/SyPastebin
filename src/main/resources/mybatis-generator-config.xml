@@ -5,24 +5,25 @@
 
 <generatorConfiguration>
     <!-- 引入配置文件 -->
-    <properties resource="application.yml"/>
-
+    <!--<properties resource="application.yml"/>-->
+    <!--系统无法识别driver，必须指定路径-->
+    <classPathEntry location="F:\Environment\apache-maven-3.6.3\repository\mysql\mysql-connector-java\8.0.22\mysql-connector-java-8.0.22.jar" />
 
     <context id="myContext" targetRuntime="MyBatis3" defaultModelType="flat">
 
 
         <!-- 注释 -->
-        <commentGenerator>
-            <!-- 是否不生成注释 -->
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
+        <!--<commentGenerator>-->
+        <!--    &lt;!&ndash; 是否不生成注释 &ndash;&gt;-->
+        <!--    <property name="suppressAllComments" value="true"/>-->
+        <!--</commentGenerator>-->
 
 
         <!-- jdbc连接 -->
-        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
-                        connectionURL="${spring.datasource.url}"
-                        userId="${spring.datasource.username}"
-                        password="${spring.datasource.password}">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/sypastebin?serverTimezone=UTC"
+                        userId="root"
+                        password="admin123">
             <!--高版本的 mysql-connector-java 需要设置 nullCatalogMeansCurrent=true-->
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>

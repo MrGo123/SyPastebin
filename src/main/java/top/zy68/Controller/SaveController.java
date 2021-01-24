@@ -1,8 +1,11 @@
 package top.zy68.Controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+import top.zy68.Service.HandleDataService;
 
 /**
  * @ClassName SaveController
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
  **/
 @Controller
 public class SaveController {
+    @Autowired
+    private HandleDataService handleDataService;
 
     /**
      * home page controller
@@ -39,6 +44,6 @@ public class SaveController {
 
         //这里一大堆对数据的处理及生成
 
-        return pasteCode+saveTime;
+        return handleDataService.generateRecord(saveTime,pasteCode);
     }
 }
