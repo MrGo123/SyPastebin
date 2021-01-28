@@ -14,7 +14,7 @@ class HandleDataServiceImplTest {
 
     @Test
     void generateRecordTest(){
-        String res = handleDataService.generateRecord(200,"hello world");
+        String res = handleDataService.generateRecord(200,"hello world","192126223168");
         System.out.println(res);
     }
 }

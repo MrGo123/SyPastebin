@@ -4,6 +4,15 @@ spring:
     username: root
     password: admin123
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  data:
+    mongodb:
+      database: sypastebin
+      host: 127.0.0.1
+      port: 27017
+      username: user
+      password: admin123
+
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package: com.zy68.Model
+  type-aliases-package: top.zy68.Model

@@ -6,6 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import top.zy68.Service.HandleDataService;
+import top.zy68.Utils.IpUtil;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName SaveController
@@ -38,12 +42,16 @@ public class SaveController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public String getPasteData(@RequestParam(value = "pasteCode") String pasteCode,
-                               @RequestParam(value = "saveTime") int saveTime) {
+                               @RequestParam(value = "saveTime") int saveTime,
+                               HttpServletRequest request) {
 
+
+
+        String clientIp = IpUtil.getIpAddr(request);
         System.out.println(pasteCode + saveTime);
 
-        //这里一大堆对数据的处理及生成
+        //调用数据处理及返回结果服务
 
-        return handleDataService.generateRecord(saveTime,pasteCode);
+        return handleDataService.generateRecord(saveTime,pasteCode,clientIp);
     }
 }
