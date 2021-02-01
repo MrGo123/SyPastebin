@@ -36,19 +36,20 @@ public class HandleDataServiceImpl implements HandleDataService {
     @Override
     public String generateRecord(int saveTime, String pasteCode, String clientIp) {
 
-        //todo1 根据saveTime，通过一个方法确定保存的时间
-        // paste.setExpirationTime(saveTime);
+        // todo1 根据saveTime，通过一个方法确定保存的时间
+        paste.setExpirationTime(saveTime);
 
         paste.setCreateTime(new Date());
 
-        // todo使用正则提取ip字符串的数字
-        // String ipTimestamp = ""+ System.currentTimeMillis();
+        // 生成IP和时间戳
+        // String ipTimestamp = clientIp+ String.valueOf(System.currentTimeMillis());
         // todo2 使用md5生成一个shortLink
         // String shortLink = generateShortLinkService.getShortLinkFromBase62Encoding(generateShortLinkService.encryptByMd5DigestUtils(ipTimestamp));
 
         // todo查mysql是否已存在此shortLink
+        String shortLink = "G1uuuus";
         // pasteMapper.selectByPrimaryKey(shortLink);
-        // paste.setShortLink(shortLink);
+        paste.setShortLink(shortLink);
 
         // todo3 存储在对象存储中的路径，即存objectid，存code时返回id即可。
         String objectId = mongoDbService.insertDocument(pasteCode);
@@ -56,12 +57,12 @@ public class HandleDataServiceImpl implements HandleDataService {
             paste.setPastePath(objectId);
         }
 
-        // int flag = pasteMapper.insert(paste);
-        // if (flag == 1) {
-        //     System.out.println("insert success");
-        // }
+        int flag = pasteMapper.insert(paste);
+        if (flag == 1) {
+            System.out.println("insert success");
+        }
 
-        return "done well";
+        return "http://localhost:8080/api/" + shortLink;
     }
 
 }
