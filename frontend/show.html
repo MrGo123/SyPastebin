@@ -1,30 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Show</title>
     <link rel="stylesheet" href="css/showCss.css">
     <script src="js/showScript.js"></script>
-</head>
-<body>
+    <script src="script/jquery.js"></script>
+    <script>
+        // <!-- get data from backend -->
+        $(document).ready(function () {
 
-<h2>Show the code here!!!</h2>
-<!--展示内容：
+            // var url = window.location.href;
+            // alert(url);
+
+            $.ajax({
+                url: "http://localhost:8080/api/Ad2uo3k",
+                type: "get",
+                dataType: "html",
+                data: {
+                },
+                success: function (json) {
+                    var jsonData = $.parseJSON(json);
+                    $("#url").html(jsonData.data.shortLink);
+                    $("#build_time").html(jsonData.data.createTime);
+                    $("#expiration_time").html(jsonData.data.expirationTime);
+                    $("#paste_code").html(jsonData.data.pasteCode);
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body style="text-align: center;">
+
+    <h2>Show the code here!!!</h2>
+    <!--展示内容：
     1. 当前url；
     2. paste模块；
     3. 创建时间、保存时间；
     -->
-<div id="paste_basic_info">
-    URL
-    <div id="url"></div>
-    创建时间
-    <div id="build_time">
-        保存时间
+    <div id="paste_basic_info">
+        短URL:
+        <div id="url"></div>
+        <hr>
+        创建时间：
+        <div id="build_time"></div>
+        <hr>
+        保存时间：
         <div id="expiration_time"></div>
+        <hr>
     </div>
-</div>
+    粘贴内容：
+    <div id="paste_code" style="background-color: aliceblue;">loding code</div>
 
-<div id="paste_code">loding code</div>
 
 </body>
+
 </html>
