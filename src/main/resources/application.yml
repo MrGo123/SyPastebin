@@ -16,3 +16,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: top.zy68.Model
+
+logging:
+  config: classpath:logback-spring.xml
+#  level: trace
