@@ -1,9 +1,14 @@
 package top.zy68.Service.ServiceImpl;
 
+import com.mongodb.client.result.DeleteResult;
+import jdk.nashorn.internal.objects.annotations.Where;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import top.zy68.Model.PasteCode;
 import top.zy68.Service.MongoDbService;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
 import javax.annotation.Resource;
 
@@ -37,5 +42,12 @@ public class MongoDbServiceImpl implements MongoDbService {
             return pasteCode.getPasteCode();
         }
         return null;
+    }
+
+    @Override
+    public int removeById(String id) {
+        // 通过id删除，返回删除数量
+        DeleteResult deleteResult = mongoTemplate.remove(query(where("_id").is(id)), COLLECTION_NAME);
+        return (int)deleteResult.getDeletedCount();
     }
 }

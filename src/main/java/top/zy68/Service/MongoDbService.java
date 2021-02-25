@@ -14,4 +14,11 @@ public interface MongoDbService {
      * @return
      */
     String selectById(String id);
+
+    /**
+     * remove a document by id, return the document numbers which were removed.
+     * @param id
+     * @return
+     */
+    int removeById(String id);
 }

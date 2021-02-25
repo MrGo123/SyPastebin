@@ -1,6 +1,7 @@
 package top.zy68.Service.ServiceImpl;
 
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,5 +22,11 @@ class MongoDbServiceImplTest {
     void selectById(){
         String id = "60126fd9e063fd4bdcac91d9";
         System.out.println(mongoDbService.selectById(id));
+    }
+
+    // @Test
+    void removeById() {
+        int res = mongoDbService.removeById("603712687c617b4f2284ef7b");
+        System.out.println(res);
     }
 }
