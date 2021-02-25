@@ -136,4 +136,14 @@ public class Paste {
     public void setPastePath(String pastePath) {
         this.pastePath = pastePath;
     }
+
+    @Override
+    public String toString() {
+        return "Paste{" +
+                "shortLink='" + shortLink + '\'' +
+                ", expirationTime=" + expirationTime +
+                ", createTime=" + createTime +
+                ", pastePath='" + pastePath + '\'' +
+                '}';
+    }
 }
