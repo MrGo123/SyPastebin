@@ -1,7 +1,6 @@
 package top.zy68.Service;
 
 
-import org.springframework.stereotype.Component;
 
 
 public interface HandleDataService {
