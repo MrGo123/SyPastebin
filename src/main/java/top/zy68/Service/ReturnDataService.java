@@ -4,8 +4,8 @@ import top.zy68.VO.PasteInfoVO;
 
 public interface ReturnDataService {
     /**
-     *
-     * @return
+     * handling the request from the client and make a response
+     * @return PasteInfoVO
      */
-    public PasteInfoVO returnDataHandling(String shortLink);
+    PasteInfoVO returnDataHandling(String shortLink);
 }
