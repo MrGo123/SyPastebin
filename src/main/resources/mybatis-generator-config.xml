@@ -12,11 +12,11 @@
     <context id="myContext" targetRuntime="MyBatis3" defaultModelType="flat">
 
 
-        <!-- 注释 -->
-        <!--<commentGenerator>-->
-        <!--    &lt;!&ndash; 是否不生成注释 &ndash;&gt;-->
-        <!--    <property name="suppressAllComments" value="true"/>-->
-        <!--</commentGenerator>-->
+         <!--注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
 
 
         <!-- jdbc连接 -->

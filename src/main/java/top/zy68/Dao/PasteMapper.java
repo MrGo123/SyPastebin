@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import top.zy68.Model.Paste;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface PasteMapper {
@@ -18,4 +20,6 @@ public interface PasteMapper {
     int updateByPrimaryKeySelective(Paste record);
 
     int updateByPrimaryKey(Paste record);
+
+    List<Paste> selectOverdueRecords();
 }
