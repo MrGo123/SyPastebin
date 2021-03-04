@@ -1,9 +1,12 @@
 package top.zy68.Model;
 
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 @Component
+@ToString
 public class Paste {
     private String shortLink;
 
