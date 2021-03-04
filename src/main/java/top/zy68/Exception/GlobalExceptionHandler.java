@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import top.zy68.VO.PasteInfoVO;
+import top.zy68.VO.ResultVO;
 
 /**
  * @ClassName GlobalExceptionHandler
@@ -31,9 +31,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public PasteInfoVO handleTypeMismatchException(NullPointerException exception) {
+    public ResultVO handleTypeMismatchException(NullPointerException exception) {
         LOGGER.error("空指针异常,{}", exception.getMessage());
-        return new PasteInfoVO(500, "空指针异常", null);
+        return new ResultVO(500, "空指针异常", null);
     }
 
     /**
@@ -43,8 +43,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public PasteInfoVO handleUnexpectedServer(Exception exception) {
+    public ResultVO handleUnexpectedServer(Exception exception) {
         LOGGER.error("系统异常", exception);
-        return new PasteInfoVO(500, "系统异常，请联系管理员", null);
+        return new ResultVO(500, "系统异常，请联系管理员", null);
     }
 }

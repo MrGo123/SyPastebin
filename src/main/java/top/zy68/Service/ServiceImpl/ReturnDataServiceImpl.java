@@ -7,7 +7,7 @@ import top.zy68.Model.Paste;
 import top.zy68.Model.PasteInfoForShow;
 import top.zy68.Service.MongoDbService;
 import top.zy68.Service.ReturnDataService;
-import top.zy68.VO.PasteInfoVO;
+import top.zy68.VO.ResultVO;
 
 /**
  * @ClassName ReturnDataServiceImpl
@@ -35,13 +35,13 @@ public class ReturnDataServiceImpl implements ReturnDataService {
      * @return
      */
     @Override
-    public PasteInfoVO returnDataHandling(String shortLink) {
+    public ResultVO returnDataHandling(String shortLink) {
 
 
         Paste paste = pasteMapper.selectByPrimaryKey(shortLink);
 
         if (paste == null) {
-            return new PasteInfoVO(404, "不存在该粘贴或已过期", null);
+            return new ResultVO(404, "不存在该粘贴或已过期", null);
         }
 
         // 将所有paste信息封装到pasteInfoForShow
@@ -55,6 +55,6 @@ public class ReturnDataServiceImpl implements ReturnDataService {
         // questionTodo 是否增加数据库异常判断
         pasteInfoForShow.setPasteCode(mongoDbService.selectById(paste.getPastePath()));
 
-        return new PasteInfoVO(200, "successful", pasteInfoForShow);
+        return new ResultVO(200, "successful", pasteInfoForShow);
     }
 }
