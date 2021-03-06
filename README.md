@@ -22,7 +22,7 @@ An online light Pastebin for developers.
 3. 服务跟踪
 
 # Others
-* 增加用户功能：通过邮箱注册、登录（权限管理）
+* 增加用户功能：通过邮箱注册、登录
 
 持续撸码维护中~~~😁😁
 
