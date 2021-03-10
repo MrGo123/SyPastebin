@@ -2,97 +2,108 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>SyPastebin</title>
-    <link rel="stylesheet" href="css/indexCss.css">
-    <script src="js/indexScript.js"></script>
-    <script src="script/jquery.js"></script>
-    <script>
-        // <!-- get data from backend -->
-        $(document).ready(function () {
-            $("#generate_btn").click(function () {
-                var paste_code = $("#paste_code").val();
-
-                // 处理粘贴输入框为空的情况，发起提示。
-                var str = paste_code;
-                if (str === '' || str === undefined) {
-                    alert("粘贴内容不能为空");
-                    return;
-                }
-
-                var saveTime = $("#select_save_time option:selected").val();
-                $.ajax({
-                    url: "http://localhost:8080/save",
-                    type: "post",
-                    dataType: "html",
-                    data: {
-                        "pasteCode": paste_code,
-                        "saveTime": saveTime
-                    },
-                    success: function (msg) {
-                        $("#res").html(msg);
-                    }
-                });
-            });
-        });
-
-        //turn to show page
-        function visit_url() {
-            var url = $("#res").html();
-            if (url != null) {
-                window.open(url);
-            }
-        }
-
-        function click_copy_url() {
-            var url = $("#res").html();
-            var oInput = document.createElement('input');
-            oInput.value = url;
-            document.body.appendChild(oInput);
-            oInput.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-            oInput.className = 'oInput';
-            oInput.style.display = 'none';
-            alert("复制成功");
-
-        }
-    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Agency - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
 </head>
 
-<body>
-<div style="text-align: center">
-    <h2>Welcome to SyPastebin</h2>
-</div>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">SyPastebin</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ml-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Functions</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<!--点击Generate，进行生成url，而本页面不动。通过ajax返回url并显示出来-->
-<!--由js的ajax实现提交数据到后台-->
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">Welcome To SyPastebin!</div>
+            <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+            <a class="btn btn-blue btn-xl text-uppercase js-scroll-trigger" href="./create.html">Pasting Code</a>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#about">Tell Me More</a>
+            <a class="btn btn-light-blue btn-xl text-uppercase js-scroll-trigger" href="./show.html">Getting Code</a>
+        </div>
+    </header>
 
-<div style="text-align: center">
+    <!-- Services-->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">SyPastebin</h2>
+                <h3 class="section-subheading text-muted">Share code or text online</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas far fa-grin-wink fa-stack-2x text-primary"></i>
+                        <!-- <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> -->
+                    </span>
+                    <h4 class="my-3 text-uppercase">function</h4>
+                    <p class="text-muted">粘贴代码并得到一个访问链接，可根据需要选择保存时长或永久保存。</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas far fa-grin-beam fa-stack-2x text-primary"></i>
+                        <!-- <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> -->
+                    </span>
+                    <h4 class="my-3 text-uppercase">About</h4>
+                    <p class="text-muted">这是一个个人开发的小项目，正在不断补充功能和维护中，欢迎访问和使用。</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fas far fa-grin-alt fa-stack-2x text-primary"></i>
+                        <!-- <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> -->
+                    </span>
+                    <h4 class="my-3 text-uppercase">Contact</h4>
+                    <p class="text-muted">如果您对本项目有兴趣，欢迎联系<br><br>
+                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <label for="paste_code">粘贴面板</label><input id="paste_code" name="paste_code" type="text">
+    <footer class="text-center">
+        <a class="btn btn-dark btn-social mx-2" href="https://github.com/MrGo123"><i class="fab fa-github"></i></a>
+        <a class="btn btn-dark btn-social mx-2" href="https://zy68.top"><i class="fab fas fa-blog"></i></a>
+        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+        <br><br><br><br>
+    </footer>
 
-    <!--下拉选择保存时间-->
-    <label for="select_save_time">选择保存时间</label><select id="select_save_time" name="select_save_time">
-    <option id="time1" value="1" selected>不过期</option>
-    <option id="time2" value="2">一天</option>
-    <option id="time3" value="3">两天</option>
-    <option id="time4" value="4">一周</option>
-    <option id="time5" value="5">一个月</option>
-</select>
-
-    <button id="generate_btn" name="generate">生成</button>
-
-</div>
-
-<!--ajax取得生成的url，并显示在下面，作为一个link给用户访问-->
-
-<!--todo这部分可先隐藏，生成url再显示-->
-<div style="text-align: center">
-    生成的url：
-    <div id="res"></div>
-    <button id="visit_btn" onclick="visit_url()">访问</button>
-    <button id="copy_btn" onclick="click_copy_url()">复制</button>
-</div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+    <script src="assets/mail/jqBootstrapValidation.js"></script>
+    <script src="assets/mail/contact_me.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- <script src="js/jquery.js"></script> -->
 
 </body>
 

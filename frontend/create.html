@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SyPastebin</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script src="./script/jquery.js"></script>
+    
+    <style type="text/css" media="screen">
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div style="text-align: center">
+        <h2>Welcome to SyPastebin</h2>
+    </div>
+
+    <div id="wrapper">
+        <div class="content" style="width: 950px">
+            <div class="column1" style="margin-top: 47px">
+                <div id="editor">function foo(items) {
+                    var x = "All this is syntax highlighted";
+                    return x;
+                    }</div>
+            </div>
+            <script>
+                var editor = ace.edit("editor");
+                editor.setTheme("ace/theme/monokai");
+                editor.session.setMode("ace/mode/javascript");
+            </script>
+            <div class="column1" style="margin-top: 47px">
+                <div style="text-align: center">
+
+                    <!-- <label for="paste_code">粘贴面板</label><input id="paste_code" name="paste_code" type="text" style="height: 400px;width: 50%;"> -->
+                    <br>
+                    <!--下拉选择保存时间-->
+                    <label for="select_save_time">选择保存时间</label><select id="select_save_time" name="select_save_time">
+                        <option id="time1" value="0" selected>不过期</option>
+                        <option id="time2" value="1">一天</option>
+                        <option id="time3" value="2">两天</option>
+                        <option id="time4" value="7">一周</option>
+                        <option id="time5" value="8">一个月</option>
+                    </select>
+
+                    <button id="generate_btn" name="generate">生成</button>
+                </div>
+
+                <!--ajax取得生成的url，并显示在下面，作为一个link给用户访问-->
+
+                <!--todo这部分可先隐藏，生成url再显示-->
+                <div style="text-align: center">
+                    生成的url：
+                    <div id="res"></div>
+                    <button id="visit_btn" onclick="visit_url()">访问</button>
+                    <button id="copy_btn" onclick="click_copy_url()">复制</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // <!-- save and get url from backend -->
+        $(document).ready(function () {
+            $("#generate_btn").click(function () {
+                // var paste_code = $("#textarea").val();
+
+                var paste_code = document.getElementById("textarea").value;
+
+
+                // 处理粘贴输入框为空的情况，发起提示。
+                var str = paste_code;
+                // alert(str);
+                if (str === '' || str === undefined) {
+                    alert("粘贴内容不能为空");
+                    return;
+                }
+
+                var saveTime = $("#select_save_time option:selected").val();
+                $.ajax({
+                    url: "http://localhost:8080/save",
+                    type: "post",
+                    dataType: "html",
+                    data: {
+                        "pasteCode": paste_code,
+                        "saveTime": saveTime
+                    },
+                    success: function (msg) {
+                        $("#res").html(msg);
+                    }
+                });
+            });
+        });
+
+        //turn to show page
+        function visit_url() {
+            var url = $("#res").html();
+            if (url != null && url != "") {
+                window.open(url);
+            } else {
+                alert("链接不能为空");
+            }
+
+        }
+
+        // copy url
+        function click_copy_url() {
+            var url = $("#res").html();
+            var oInput = document.createElement('input');
+            oInput.value = url;
+            document.body.appendChild(oInput);
+            oInput.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            oInput.className = 'oInput';
+            oInput.style.display = 'none';
+            alert("复制成功");
+        }
+    </script>
+
+</body>
+
+</html>

@@ -10,12 +10,8 @@
     <script>
         // <!-- get data from backend -->
         $(document).ready(function () {
-
-            // var url = window.location.href;
-            // alert(url);
-
             $.ajax({
-                url: "http://localhost:8080/api/Ad2uo3k",
+                url: "http://localhost:8080/api/RbzbB7A",
                 type: "get",
                 dataType: "html",
                 data: {
@@ -25,7 +21,7 @@
                     $("#url").html(jsonData.data.shortLink);
                     $("#build_time").html(jsonData.data.createTime);
                     $("#expiration_time").html(jsonData.data.expirationTime);
-                    $("#paste_code").html(jsonData.data.pasteCode);
+                    $("#paste_code").html(jsonData.data.pasteCode); 
                 }
             });
 
@@ -36,11 +32,7 @@
 <body style="text-align: center;">
 
     <h2>Show the code here!!!</h2>
-    <!--展示内容：
-    1. 当前url；
-    2. paste模块；
-    3. 创建时间、保存时间；
-    -->
+  
     <div id="paste_basic_info">
         短URL:
         <div id="url"></div>
@@ -48,12 +40,14 @@
         创建时间：
         <div id="build_time"></div>
         <hr>
-        保存时间：
+        过期时间：
         <div id="expiration_time"></div>
         <hr>
     </div>
     粘贴内容：
-    <div id="paste_code" style="background-color: aliceblue;">loding code</div>
+    <div id="paste_code">
+        loding code
+    </div>
 
 
 </body>
