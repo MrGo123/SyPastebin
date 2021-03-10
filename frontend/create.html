@@ -6,16 +6,16 @@
     <title>SyPastebin</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script src="./script/jquery.js"></script>
-    
+
     <style type="text/css" media="screen">
         #editor {
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 30%;
+            right: 20%;
             bottom: 0;
-            left: 0;
-            width: 500px;
-            height: 500px;
+            left: 20%;
+            width: 60%;
+            height: 60%;
         }
     </style>
 </head>
@@ -30,10 +30,10 @@
     <div id="wrapper">
         <div class="content" style="width: 950px">
             <div class="column1" style="margin-top: 47px">
-                <div id="editor">function foo(items) {
-                    var x = "All this is syntax highlighted";
-                    return x;
-                    }</div>
+<div id="editor">function foo(items) {
+    var x = "All this is syntax highlighted";
+    return x;
+}</div>
             </div>
             <script>
                 var editor = ace.edit("editor");
@@ -127,7 +127,14 @@
             alert("复制成功");
         }
     </script>
-
+    <script src="./ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        // 在\ace-builds\src-noconflict\ext-themelist.js可选择主题
+        editor.setTheme("ace/theme/tomorrow_night");
+        editor.session.setMode("ace/mode/javascript");
+        editor.resize()
+    </script>
 </body>
 
 </html>
