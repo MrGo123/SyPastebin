@@ -26,7 +26,7 @@ public class ScheduledTasks{
 
     @Scheduled(fixedDelay = 2000)
     public void cleanOverdueData(){
-        timeTaskService.timeTaskToCleanOverdueData();
+        timeTaskService.cleanOverdueData();
     }
 
 }
