@@ -14,7 +14,7 @@ class SypasteApplicationTests {
     @Autowired
     DataSource dataSource;
 
-    // @Test
+    @Test
     void contextLoads() throws SQLException {
         System.out.println("connection:" + dataSource.getConnection());
     }
@@ -22,7 +22,7 @@ class SypasteApplicationTests {
     /**
      * handling the ip
      */
-    @Test
+    // @Test
     void ipHandlingTest() {
         String ip = "192:168:126:126";
         String[] strs = ip.split(":");
