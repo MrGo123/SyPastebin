@@ -12,7 +12,10 @@ An online light Pastebin for developers.
 
 **Others**
 1. log framework: Logback
-2. RestApi document: Swagger2
+2. RestApi document: Swagger2  
+visit:http://localhost:8080/swagger-ui.html
+3. DatabasePool: Druid  
+visit: http://localhost:8080/druid/index.html
 
 
 
@@ -20,6 +23,7 @@ An online light Pastebin for developers.
 1. 前端优化：面板更美观
 2. 粘贴板优化：根据不同编程语言使用不同的代码主题
 3. 服务跟踪
+4. 集成Redis
 
 # Others
 * 增加用户功能：通过邮箱注册、登录
