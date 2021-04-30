@@ -41,7 +41,7 @@ public class IpUtil {
             ip = request.getRemoteAddr();
         }
 
-        // remove the ":" in ip.
+        // remove the ":" from ip.
         String[] ipStrs = ip.split(":");
         StringBuilder newIp = new StringBuilder();
         for (String string : ipStrs) {
