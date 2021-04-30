@@ -33,11 +33,10 @@ public class SaveController {
     public String getPasteData(@RequestParam(value = "pasteCode") String pasteCode,
                                @RequestParam(value = "saveTime") int saveTime,
                                HttpServletRequest request) {
+
         // 通过ipUtil拿到client的ip，并将此IP直接传给数据生成服务。
         String clientIp = IpUtil.getIpAddress(request);
 
-
-        // return "done";
         return handleDataService.generateRecord(saveTime,pasteCode,clientIp);
     }
 
