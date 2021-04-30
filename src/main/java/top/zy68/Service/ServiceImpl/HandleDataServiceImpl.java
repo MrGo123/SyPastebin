@@ -105,6 +105,12 @@ public class HandleDataServiceImpl implements HandleDataService {
         return "http://localhost:8080/api/" + shortLink;
     }
 
+    /**
+     * 根据创建时间和保存时间计算到期时间并返回
+     * @param saveTime
+     * @param createDate
+     * @return
+     */
     private Date calculateExpirationDate(int saveTime, Date createDate) {
         Calendar time = Calendar.getInstance();
         time.setTime(createDate);
