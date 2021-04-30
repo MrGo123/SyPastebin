@@ -2,7 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="一个支持代码分享功能的小应用" />
+    <meta name="author" content="Sustart" />
+    <title>Paste</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+
+
+    <link href="css/googleapis.css" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+
     <title>SyPastebin</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <script src="./script/jquery.js"></script>
@@ -20,68 +33,66 @@
     </style>
 </head>
 
-<body>
+<body style="background-color: rgb(212, 248, 188);">
 
 
-    <div style="text-align: center">
-        <h2>Welcome to SyPastebin</h2>
-    </div>
-
-    <div id="wrapper">
-        <div class="content" style="width: 950px">
-            <div class="column1" style="margin-top: 47px">
-<div id="editor">function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-}</div>
-            </div>
-            <script>
-                var editor = ace.edit("editor");
-                editor.setTheme("ace/theme/monokai");
-                editor.session.setMode("ace/mode/javascript");
-            </script>
-            <div class="column1" style="margin-top: 47px">
-                <div style="text-align: center">
-
-                    <!-- <label for="paste_code">粘贴面板</label><input id="paste_code" name="paste_code" type="text" style="height: 400px;width: 50%;"> -->
-                    <br>
-                    <!--下拉选择保存时间-->
-                    <label for="select_save_time">选择保存时间</label><select id="select_save_time" name="select_save_time">
-                        <option id="time1" value="0" selected>不过期</option>
-                        <option id="time2" value="1">一天</option>
-                        <option id="time3" value="2">两天</option>
-                        <option id="time4" value="7">一周</option>
-                        <option id="time5" value="8">一个月</option>
-                    </select>
-
-                    <button id="generate_btn" name="generate">生成</button>
-                </div>
-
-                <!--ajax取得生成的url，并显示在下面，作为一个link给用户访问-->
-
-                <!--todo这部分可先隐藏，生成url再显示-->
-                <div style="text-align: center">
-                    生成的url：
-                    <div id="res"></div>
-                    <button id="visit_btn" onclick="visit_url()">访问</button>
-                    <button id="copy_btn" onclick="click_copy_url()">复制</button>
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="./index.html">SyPastebin</a>
         </div>
+    </nav>
+
+    <div style="margin-top: 7%;text-align: center;">
+
+        <a class="btn btn-blue btn-x2" id="generate_btn">生成</a>
+        <a class="btn btn-primary btn-x2" id="visit_btn" onclick="visit_url()">访问</a>
+        <a class="btn btn-light-blue btn-x2" id="copy_btn" onclick="click_copy_url()">复制</a>
+
+
+        <div id="functions">
+            <label for="select_save_time">选择保存时间</label><select id="select_save_time" name="select_save_time">
+                <option id="time1" value="0" selected>不过期</option>
+                <option id="time2" value="1">一天</option>
+                <option id="time3" value="2">两天</option>
+                <option id="time4" value="7">一周</option>
+                <option id="time5" value="8">一个月</option>
+            </select><br/>
+            生成的url：<span id="res"></span>
+        </div>
+
     </div>
 
-    <script type="text/javascript">
+    <div id="editor"></div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+    <script src="assets/mail/jqBootstrapValidation.js"></script>
+    <script src="assets/mail/contact_me.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+
+    <script src="./ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        document.getElementById("copy_btn").hidden = true;
+        document.getElementById("visit_btn").hidden = true;
+
+        var editor = ace.edit("editor");
+        // 在\ace-builds\src-noconflict\ext-themelist.js可选择主题
+        editor.setTheme("ace/theme/tomorrow_night");
+        editor.session.setMode("ace/mode/javascript");
+        editor.resize();
+
+
+
         // <!-- save and get url from backend -->
         $(document).ready(function () {
             $("#generate_btn").click(function () {
-                // var paste_code = $("#textarea").val();
+                var str = editor.getValue();
 
-                var paste_code = document.getElementById("textarea").value;
-
-
-                // 处理粘贴输入框为空的情况，发起提示。
-                var str = paste_code;
-                // alert(str);
                 if (str === '' || str === undefined) {
                     alert("粘贴内容不能为空");
                     return;
@@ -93,17 +104,19 @@
                     type: "post",
                     dataType: "html",
                     data: {
-                        "pasteCode": paste_code,
+                        "pasteCode": str,
                         "saveTime": saveTime
                     },
                     success: function (msg) {
                         $("#res").html(msg);
                     }
                 });
+                document.getElementById("copy_btn").hidden = false;
+                document.getElementById("visit_btn").hidden = false;
             });
         });
 
-        //turn to show page
+        //turn to show.html
         function visit_url() {
             var url = $("#res").html();
             if (url != null && url != "") {
@@ -111,7 +124,6 @@
             } else {
                 alert("链接不能为空");
             }
-
         }
 
         // copy url
@@ -126,14 +138,7 @@
             oInput.style.display = 'none';
             alert("复制成功");
         }
-    </script>
-    <script src="./ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var editor = ace.edit("editor");
-        // 在\ace-builds\src-noconflict\ext-themelist.js可选择主题
-        editor.setTheme("ace/theme/tomorrow_night");
-        editor.session.setMode("ace/mode/javascript");
-        editor.resize()
+
     </script>
 </body>
 
