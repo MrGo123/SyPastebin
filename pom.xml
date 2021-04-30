@@ -63,11 +63,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--    <groupId>org.springframework.boot</groupId>-->
-        <!--    <artifactId>spring-boot-starter-jdbc</artifactId>-->
-        <!--</dependency>-->
-
         <!--Lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -84,12 +79,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!--<dependency>-->
-        <!--    <groupId>org.apache.maven.plugins</groupId>-->
-        <!--    <artifactId>maven-resources-plugin</artifactId>-->
-        <!--    <version>3.2.0</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -129,7 +118,6 @@
                     <!--将当前pom的依赖项添加到生成器的类路径中，就不必再配置已有的插件所需的依赖-->
                     <includeCompileDependencies>true</includeCompileDependencies>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
