@@ -19,6 +19,7 @@ An online light Pastebin for developers.
 visit:http://localhost:8080/swagger-ui.html
 3. DatabasePool: Druid  
 visit: http://localhost:8080/druid/index.html
+4. Editor framework: [Ace](https://ace.c9.io/)
 
 # Todo
 1. 前端优化：面板更美观
