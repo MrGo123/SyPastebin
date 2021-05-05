@@ -57,6 +57,7 @@
                 <option id="time4" value="7">一周</option>
                 <option id="time5" value="8">一个月</option>
             </select><br/>
+            <label id="user_def_short_link_label">自定义短连接</label> <input id="user_def_short_link" type="text"><button onclick=user_def_short_link_check()>testbtn</button>
             生成的url：<span id="res"></span>
         </div>
 
@@ -99,13 +100,16 @@
                 }
 
                 var saveTime = $("#select_save_time option:selected").val();
+                var user_def_short_url = $("#user_def_short_link").val();//要经function user_def_short_link_check()校验
+
                 $.ajax({
                     url: "http://localhost:8080/save",
                     type: "post",
                     dataType: "html",
                     data: {
                         "pasteCode": str,
-                        "saveTime": saveTime
+                        "saveTime": saveTime,
+                        "userDefShortLink" : user_def_short_url
                     },
                     success: function (msg) {
                         $("#res").html(msg);
@@ -137,6 +141,12 @@
             oInput.className = 'oInput';
             oInput.style.display = 'none';
             alert("复制成功");
+        }
+        // 判断用户自定义的短连接是否合法
+        function user_def_short_link_check(){
+            var short_url = $("#user_def_short_link").val();
+            alert(short_url);
+            // todo 短连接校验：要么为空，要么0~9、a~z、A~Z,七个字符
         }
 
     </script>

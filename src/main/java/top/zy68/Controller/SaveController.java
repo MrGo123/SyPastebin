@@ -32,12 +32,12 @@ public class SaveController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String getPasteData(@RequestParam(value = "pasteCode") String pasteCode,
                                @RequestParam(value = "saveTime") int saveTime,
+                               @RequestParam(value = "userDefShortLink") String userDefinedShortLink,
                                HttpServletRequest request) {
 
-        // 通过ipUtil拿到client的ip，并将此IP直接传给数据生成服务。
         String clientIp = IpUtil.getIpAddress(request);
 
-        return handleDataService.generateRecord(saveTime,pasteCode,clientIp);
+        return handleDataService.generateRecord(saveTime,pasteCode,userDefinedShortLink,clientIp);
     }
 
 
