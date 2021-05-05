@@ -1,6 +1,6 @@
 package top.zy68.Service.ServiceImpl;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class HandleDataServiceImpl implements HandleDataService {
      * 流程逻辑：
      * 传入参数：根据得到的保存时间、要保存的粘贴内容、客户端ip、（用户自定义的短URL）
      * 一、生成短URL：
-     * 1. 若用户有传入自定义的短URL，先查找MySQL中看看有没有？没有，允许插入；有，则反馈给用户更改或选择自动生成。——待实现
+     * 1. 若用户有传入自定义的短URL，先查找MySQL中看看有没有？没有，允许插入；有，则自动生成。
      * 2. 自动生成——取ip和时间戳，通过md5和base62生成。
      * 3. 检测MySQL中是否已存在该短URL。
      *
@@ -53,38 +53,25 @@ public class HandleDataServiceImpl implements HandleDataService {
      * @return
      */
     @Override
-    public String generateRecord(int saveTime, String pasteCode, String clientIp) {
+    public String generateRecord(int saveTime, String pasteCode, String userDefinedShortLink, String clientIp) {
 
-        // todo1 根据saveTime，通过一个方法确定保存的时间
+        // 1. 根据saveTime，保存创建时间和过期时间
         Date createDate = new Date();
-        paste.setExpirationTime(calculateExpirationDate(saveTime,createDate));
         paste.setCreateTime(createDate);
+        paste.setExpirationTime(calculateExpirationDate(saveTime,createDate));
 
-
+        // 2. 短URL生成服务：先判断 userDefinedShortLink 是否合法，否则生成。
         String shortLink = "";
-        // 短URL生成服务
-        while (true) {
-            // 生成IP和时间戳
-            String ipTimestamp = clientIp + System.currentTimeMillis();
-
-            // 使用md5和Base62生成一个shortLink
-            shortLink = generateShortLinkService.getShortLinkFromBase62Encoding(
-                    generateShortLinkService.encryptByMd5DigestUtils(ipTimestamp));
-
-            // 判断生成的shortLink是否够7个字符，不够则重新生成。正常不会发生，除非md5生成的散列码转换为十进制数过小。
-            if (shortLink.length() != 7) {
-                continue;
-            }
-
-            // 检查mysql是否已存在此shortLink
-            Paste tempPaste = pasteMapper.selectByPrimaryKey(shortLink);
-            if (tempPaste == null) {
-                paste.setShortLink(shortLink);
-                break;
-            }
+        if(userDefinedShortLink != null && generateShortLinkService.shortLinkNotExist(userDefinedShortLink)){
+            shortLink = userDefinedShortLink;
+        }else{
+            shortLink = generateShortLinkService.generateShortLink(clientIp);
         }
+        paste.setShortLink(shortLink);
 
-        // 数据保存到MongoDB中
+        // todo：从这里开始，为了保证MongoDB和MySQL数据存储的一致性，应当增加事务处理。
+
+        // 3. pasteCode数据保存到MongoDB中
         try {
             String objectId = mongoDbService.insertDocument(pasteCode);
             if (objectId != null) {
@@ -94,13 +81,12 @@ public class HandleDataServiceImpl implements HandleDataService {
             LOGGER.error("插入MongoDB发送异常");
         }
 
-        // 数据保存到MySQL中
+        // 4. 数据保存到MySQL中
         try {
             pasteMapper.insert(paste);
         } catch (Exception e) {
             LOGGER.error("用户插入数据出现异常，可能失败了！！！");
         }
-
 
         return "http://localhost:8080/api/" + shortLink;
     }
