@@ -10,7 +10,6 @@ import top.zy68.Service.HandleDataService;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class HandleDataServiceImplTest {
     private final static Logger log = LoggerFactory.getLogger(HandleDataServiceImplTest.class);
@@ -20,7 +19,7 @@ class HandleDataServiceImplTest {
 
     // @Test
     void generateRecordTest(){
-        String res = handleDataService.generateRecord(200,"hello world","192126223168");
+        String res = handleDataService.generateRecord(200,"hello world","123yy562","192126223168");
         System.out.println(res);
     }
 
