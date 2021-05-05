@@ -1,18 +1,11 @@
 package top.zy68.Service.ServiceImpl;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import org.apache.ibatis.scripting.xmltags.ForEachSqlNode;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.context.annotation.ApplicationScope;
-import top.zy68.Service.GenerateShortLinkService;
-import top.zy68.Utils.Base62EncodingUtil;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
 
 @SpringBootTest
 class generateShortLinkServiceImplTest {
@@ -20,6 +13,19 @@ class generateShortLinkServiceImplTest {
     @Autowired
     GenerateShortLinkServiceImpl generateShortLinkService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(generateShortLinkServiceImplTest.class);
+
+    @Test
+    void testShortLinkNotExist(){
+        // String shortLink = "XM7jYci";
+        String shortLink = "XM7aaai";
+
+        if (generateShortLinkService.shortLinkNotExist(shortLink)) {
+            LOGGER.info("shortLink is not existed");
+        }else{
+            LOGGER.info("shortLink is existed");
+        }
+    }
 
     @Test
     void generateByMD5DigestUtils() {
@@ -27,11 +33,15 @@ class generateShortLinkServiceImplTest {
         System.out.println(hex128bits);
     }
 
-    // @Test
-    void getShortLinkFromBase62Encoding() {
-        // System.out.println(generateShortLinkService.getShortLinkFromBase62Encoding(
-        //         generateShortLinkService.encryptByMd5DigestUtils("Marydon")));
+    @Test
+    void generateShortLink() {
+        String clientIP = "192.168.126.111";
+        LOGGER.info(generateShortLinkService.generateShortLink(clientIP));
+    }
 
-        // System.out.println(Arrays.toString(Base62EncodingUtil.decodeBase62("hello")));
+    @Test
+    void getShortLinkFromBase62Encoding() {
+        System.out.println(generateShortLinkService.getShortLinkFromBase62Encoding(
+                generateShortLinkService.encryptByMd5DigestUtils("Marydon")));
     }
 }
