@@ -9,6 +9,9 @@ import top.zy68.Service.MongoDbService;
 import top.zy68.Service.ReturnDataService;
 import top.zy68.VO.ResultVO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * @ClassName ReturnDataServiceImpl
  * @Description return data to the view
@@ -46,10 +49,10 @@ public class ReturnDataServiceImpl implements ReturnDataService {
 
         // 将所有paste信息封装到pasteInfoForShow
         PasteInfoForShow pasteInfoForShow = new PasteInfoForShow();
-
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         pasteInfoForShow.setShortLink(paste.getShortLink());
-        pasteInfoForShow.setCreateTime(paste.getCreateTime());
-        pasteInfoForShow.setExpirationTime(paste.getExpirationTime());
+        pasteInfoForShow.setCreateTime(df.format(paste.getCreateTime()));
+        pasteInfoForShow.setExpirationTime(df.format(paste.getExpirationTime()));
 
         // 从mongodb拿数据
         // questionTodo 是否增加数据库异常判断

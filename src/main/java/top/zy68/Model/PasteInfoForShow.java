@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 public class PasteInfoForShow {
     private String shortLink;
-    private Date expirationTime;
-    private Date createTime;
+    private String expirationTime;
+    private String createTime;
     private String pasteCode;
 }
