@@ -57,8 +57,8 @@
                 <option id="time4" value="7">一周</option>
                 <option id="time5" value="8">一个月</option>
             </select><br/>
-            <label id="user_def_short_link_label">自定义短连接</label> <input id="user_def_short_link" type="text"><button onclick=user_def_short_link_check()>testbtn</button>
-            生成的url：<span id="res"></span>
+            <label id="user_def_short_link_label">自定义短连接</label> <input id="user_def_short_link" type="text">
+            <label id="generated_url_label">请访问链接：</label><span id="res"></span>
         </div>
 
     </div>
@@ -80,6 +80,7 @@
     <script>
         document.getElementById("copy_btn").hidden = true;
         document.getElementById("visit_btn").hidden = true;
+        document.getElementById("generated_url_label").hidden = true;
 
         var editor = ace.edit("editor");
         // 在\ace-builds\src-noconflict\ext-themelist.js可选择主题
@@ -100,8 +101,12 @@
                 }
 
                 var saveTime = $("#select_save_time option:selected").val();
-                var user_def_short_url = $("#user_def_short_link").val();//要经function user_def_short_link_check()校验
-
+                var user_def_short_url = $("#user_def_short_link").val();
+                //function user_def_short_link_check()校验
+                if(!user_def_short_link_check(user_def_short_url)){
+                    return;
+                }
+              
                 $.ajax({
                     url: "http://localhost:8080/save",
                     type: "post",
@@ -117,6 +122,8 @@
                 });
                 document.getElementById("copy_btn").hidden = false;
                 document.getElementById("visit_btn").hidden = false;
+                document.getElementById("generate_btn").hidden = true;
+                document.getElementById("generated_url_label").hidden = false;
             });
         });
 
@@ -142,11 +149,30 @@
             oInput.style.display = 'none';
             alert("复制成功");
         }
+
         // 判断用户自定义的短连接是否合法
         function user_def_short_link_check(){
-            var short_url = $("#user_def_short_link").val();
-            alert(short_url);
+            var short_url = String($("#user_def_short_link").val());
+            short_url_length = short_url.length;
             // todo 短连接校验：要么为空，要么0~9、a~z、A~Z,七个字符
+            if(short_url_length == 0){
+               return true;
+            }else if(short_url_length == 7){
+
+                for(var i = 0; i < 7; i++){
+                    var character = short_url.charAt(i);
+                    if(character >= '0' && character <= '9' || character >= 'a' && character <= 'z' || character >= 'A' && character <= 'Z'){
+                        continue;
+                    }else{
+                        alert("Error: 7个字符选自：0~9、a~z、A~Z");
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            alert("Error: 请输入7个字符：0~9、a~z、A~Z");
+            return false;
         }
 
     </script>
