@@ -37,3 +37,7 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
+
+server:
+  tomcat:
+    max-http-form-post-size: -1 # 取消最大post上传限制
