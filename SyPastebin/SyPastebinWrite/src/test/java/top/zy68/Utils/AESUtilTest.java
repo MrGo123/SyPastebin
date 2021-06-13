@@ -1,29 +1,23 @@
 package top.zy68.Utils;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 class AESUtilTest {
 
-    @Autowired
-    AESUtil aesUtil;
 
     @Test
-    void getStrKeyAES() {
+    void AESEncryptTset() throws NoSuchAlgorithmException {
+        String content = "abcdefgwegfgsdfgdsgdfsgsdgwdfgdsf";
+        System.out.println(content);
 
-    }
+        String sKey = "abcdefg";
+        System.out.println(sKey);
 
-    @Test
-    void strKey2SecretKey() {
-    }
-
-    @Test
-    void encryptAES() {
-    }
-
-    @Test
-    void decryptAES() {
+        String res = AESUtil.encrypt(content, sKey);
+        System.out.println(res);
     }
 }

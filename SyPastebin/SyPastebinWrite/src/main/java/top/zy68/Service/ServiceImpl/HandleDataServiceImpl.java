@@ -1,6 +1,7 @@
 package top.zy68.Service.ServiceImpl;
 
 
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import top.zy68.Model.Paste;
 import top.zy68.Service.GenerateShortLinkService;
 import top.zy68.Service.HandleDataService;
 import top.zy68.Service.MongoDbService;
+import top.zy68.Utils.AESUtil;
 
 
 import java.util.Calendar;
@@ -58,16 +60,26 @@ public class HandleDataServiceImpl implements HandleDataService {
         // 1. 根据saveTime，保存创建时间和过期时间
         Date createDate = new Date();
         paste.setCreateTime(createDate);
-        paste.setExpirationTime(calculateExpirationDate(saveTime,createDate));
+        paste.setExpirationTime(calculateExpirationDate(saveTime, createDate));
 
         // 2. 短URL生成服务：先判断 userDefinedShortLink 是否合法，否则生成。
         String shortLink = "";
-        if(userDefinedShortLink != null && generateShortLinkService.shortLinkNotExist(userDefinedShortLink)){
+        if (userDefinedShortLink != null && generateShortLinkService.shortLinkNotExist(userDefinedShortLink)) {
             shortLink = userDefinedShortLink;
-        }else{
+        } else {
             shortLink = generateShortLinkService.generateShortLink(clientIp);
         }
         paste.setShortLink(shortLink);
+
+        // 对粘贴的内容加密
+        String tmpPasteCode = pasteCode;
+        try {
+            pasteCode = AESUtil.encrypt(pasteCode, shortLink);
+        } catch (NullPointerException e) {
+            // 加密漏洞：如果AES加密失败返回null，那就不进行加密，明文保存。
+            pasteCode = tmpPasteCode;
+            e.printStackTrace();
+        }
 
         // todo：从这里开始，为了保证MongoDB和MySQL数据存储的一致性，应当增加事务处理。
 
@@ -93,6 +105,7 @@ public class HandleDataServiceImpl implements HandleDataService {
 
     /**
      * 根据创建时间和保存时间计算到期时间并返回
+     *
      * @param saveTime
      * @param createDate
      * @return
