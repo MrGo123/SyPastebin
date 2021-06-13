@@ -7,6 +7,7 @@ import top.zy68.Model.Paste;
 import top.zy68.Model.PasteInfoForShow;
 import top.zy68.Service.MongoDbService;
 import top.zy68.Service.ReturnDataService;
+import top.zy68.Utils.AESUtil;
 import top.zy68.VO.ResultVO;
 
 import java.text.DateFormat;
@@ -39,8 +40,6 @@ public class ReturnDataServiceImpl implements ReturnDataService {
      */
     @Override
     public ResultVO returnDataHandling(String shortLink) {
-
-
         Paste paste = pasteMapper.selectByPrimaryKey(shortLink);
 
         if (paste == null) {
@@ -55,8 +54,18 @@ public class ReturnDataServiceImpl implements ReturnDataService {
         pasteInfoForShow.setExpirationTime(df.format(paste.getExpirationTime()));
 
         // 从mongodb拿数据
-        // questionTodo 是否增加数据库异常判断
-        pasteInfoForShow.setPasteCode(mongoDbService.selectById(paste.getPastePath()));
+        String base64PasteCode = mongoDbService.selectById(paste.getPastePath());
+
+        // AES 解密
+        try {
+            String pasteCode = AESUtil.decrypt(base64PasteCode, shortLink);
+            // questionTodo 是否增加数据库异常判断
+            pasteInfoForShow.setPasteCode(pasteCode);
+        } catch (NullPointerException e) {
+            pasteInfoForShow.setPasteCode(base64PasteCode);
+            // 如果解密返回null，失败，那么直接返回未解密的内容
+            e.printStackTrace();
+        }
 
         return new ResultVO(200, "successful", pasteInfoForShow);
     }
