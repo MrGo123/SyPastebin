@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * @author ZY
  */
-@EnableScheduling
+
 @SpringBootApplication
 public class SyPastebinReadApplication {
 
