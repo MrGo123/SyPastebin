@@ -25,4 +25,5 @@ target/
 workspace.code-workspace
 
 # startLog #
-/src/main/resources/log/
+
+/SyPastebinWrite/src/main/resources/log/
