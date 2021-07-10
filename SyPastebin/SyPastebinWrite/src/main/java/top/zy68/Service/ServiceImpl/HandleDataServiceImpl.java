@@ -1,7 +1,6 @@
 package top.zy68.Service.ServiceImpl;
 
 
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +85,7 @@ public class HandleDataServiceImpl implements HandleDataService {
         // 3. pasteCode数据保存到MongoDB中
         try {
             String objectId = mongoDbService.insertDocument(pasteCode);
+            // String objectId = "mongoDbService.insertDocument(pasteCode)";
             if (objectId != null) {
                 paste.setPastePath(objectId);
             }
@@ -100,7 +100,7 @@ public class HandleDataServiceImpl implements HandleDataService {
             LOGGER.error("用户插入数据出现异常，可能失败了！！！");
         }
 
-        return "http://localhost:8081/api/" + shortLink;
+        return shortLink;
     }
 
     /**
