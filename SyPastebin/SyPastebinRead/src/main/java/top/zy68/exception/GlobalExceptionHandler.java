@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import top.zy68.vo.ResultCode;
 import top.zy68.vo.ResultVO;
 
 /**
@@ -33,7 +34,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultVO handleTypeMismatchException(NullPointerException exception) {
         LOGGER.error("空指针异常,{}", exception.getMessage());
-        return new ResultVO(500, "空指针异常", null);
+        return new ResultVO(ResultCode.NULL_POINT_EXCEPTION, null);
     }
 
     /**
@@ -45,6 +46,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultVO handleUnexpectedServer(Exception exception) {
         LOGGER.error("系统异常", exception);
-        return new ResultVO(500, "系统异常，请联系管理员", null);
+        return new ResultVO(ResultCode.NULL_POINT_EXCEPTION, null);
     }
 }

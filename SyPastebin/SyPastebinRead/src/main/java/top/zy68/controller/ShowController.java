@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import top.zy68.service.ReturnDataService;
+import top.zy68.vo.ResultCode;
 import top.zy68.vo.ResultVO;
 
 /**
@@ -23,11 +24,11 @@ public class ShowController {
     @Autowired
     ReturnDataService returnDataService;
 
-    @RequestMapping(value = "/{shortLink}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{shortLink}", method = RequestMethod.GET)
     public ResultVO showResult(@PathVariable(value = "shortLink") String shortLink) {
 
         if (shortLink == null || shortLink.length() != 7) {
-            return new ResultVO(401,"参数有误，请修改",null);
+            return new ResultVO(ResultCode.PARAM_IS_INVALID, null);
         }
 
         return returnDataService.returnDataHandling(shortLink);

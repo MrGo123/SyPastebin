@@ -15,9 +15,9 @@ public class ResultVO {
     private String message;
     private Object data;
 
-    public ResultVO(Integer code, String message, Object data) {
-        this.code = code;
-        this.message = message;
+    public ResultVO(ResultCode resultCode, Object data) {
+        this.code = resultCode.code();
+        this.message = resultCode.message();
         this.data = data;
     }
 }

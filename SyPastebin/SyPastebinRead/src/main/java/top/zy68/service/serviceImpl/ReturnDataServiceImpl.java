@@ -8,6 +8,7 @@ import top.zy68.model.PasteInfoForShow;
 import top.zy68.service.MongoDbService;
 import top.zy68.service.ReturnDataService;
 import top.zy68.utils.AESUtil;
+import top.zy68.vo.ResultCode;
 import top.zy68.vo.ResultVO;
 
 import java.text.DateFormat;
@@ -43,7 +44,7 @@ public class ReturnDataServiceImpl implements ReturnDataService {
         Paste paste = pasteMapper.selectByPrimaryKey(shortLink);
 
         if (paste == null) {
-            return new ResultVO(404, "不存在该粘贴或已过期", null);
+            return new ResultVO(ResultCode.SOURCE_IS_LOST, null);
         }
 
         // 将所有paste信息封装到pasteInfoForShow
@@ -67,6 +68,6 @@ public class ReturnDataServiceImpl implements ReturnDataService {
             e.printStackTrace();
         }
 
-        return new ResultVO(200, "successful", pasteInfoForShow);
+        return new ResultVO(ResultCode.SUCCESS, pasteInfoForShow);
     }
 }
