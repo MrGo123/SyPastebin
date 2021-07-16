@@ -31,7 +31,7 @@
 
 
         <!-- 生成实体类地址 -->
-        <javaModelGenerator targetPackage="top.zy68.Model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="top.zy68.model" targetProject="src/main/java">
             <!-- 是否针对string类型的字段在set方法中进行修剪，默认false -->
             <!--<property name="trimStrings" value="true"/>-->
         </javaModelGenerator>
@@ -43,7 +43,7 @@
         </sqlMapGenerator>
 
         <!-- 生成 XxxMapper.java 接口-->
-        <javaClientGenerator targetPackage="top.zy68.Dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="top.zy68.dao" targetProject="src/main/java" type="XMLMAPPER">
             <!--<property name="enableSubPackages" value="false"/>-->
         </javaClientGenerator>
 

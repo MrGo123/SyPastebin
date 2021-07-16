@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="top.zy68.Dao.PasteMapper">
+<mapper namespace="top.zy68.dao.PasteMapper">
 
-    <resultMap id="BaseResultMap" type="top.zy68.Model.Paste">
+    <resultMap id="BaseResultMap" type="top.zy68.model.Paste">
         <id column="short_link" jdbcType="CHAR" property="shortLink"/>
         <result column="expiration_time" jdbcType="TIMESTAMP" property="expirationTime"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
@@ -36,13 +36,13 @@
 
 
 
-    <insert id="insert" parameterType="top.zy68.Model.Paste">
+    <insert id="insert" parameterType="top.zy68.model.Paste">
     insert into paste (short_link, expiration_time, create_time, paste_path)
     values (#{shortLink,jdbcType=CHAR}, #{expirationTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{pastePath,jdbcType=VARCHAR})
   </insert>
 
-    <insert id="insertSelective" parameterType="top.zy68.Model.Paste">
+    <insert id="insertSelective" parameterType="top.zy68.model.Paste">
         insert into paste
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="shortLink != null">
@@ -74,7 +74,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="top.zy68.Model.Paste">
+    <update id="updateByPrimaryKeySelective" parameterType="top.zy68.model.Paste">
         update paste
         <set>
             <if test="expirationTime != null">
@@ -90,7 +90,7 @@
         where short_link = #{shortLink,jdbcType=CHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="top.zy68.Model.Paste">
+    <update id="updateByPrimaryKey" parameterType="top.zy68.model.Paste">
     update paste
     set expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},

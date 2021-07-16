@@ -3,7 +3,7 @@ An online light Pastebin for developers.
 
 一个前后端分离、读写服务拆分的在线剪贴板，提供在线粘贴代码、生成可供访问的url的功能。
 
-![The Great Wall of China](./READMESrc/sypastebin.png)
+![The Great Wall of China](images/sypastebin.png)
 
 # Usage
 
