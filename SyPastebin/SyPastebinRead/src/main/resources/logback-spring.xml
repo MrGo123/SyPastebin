@@ -4,7 +4,7 @@
     <!--输出格式，用于引用-->
     <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level%logger{36} - %msg%n" />
     <!--日志文件保存路径-->
-    <property name="FILE_PATH" value="SyPastebinRead/src/main/resources/log/startLog.%d{yyyy-MM-dd}.%i.log" />
+    <property name="FILE_PATH" value="./SyPastebin/logs/SyPastebinRead/SyPastebinRead-start-log.%d{yyyy-MM-dd}.%i.log" />
 
     <!--设置控制台输出，引用上述的输出格式-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
