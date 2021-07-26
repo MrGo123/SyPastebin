@@ -8,8 +8,6 @@
     <meta name="author" content="Sustart" />
     <title>Paste</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
 
 
     <link href="css/googleapis.css" rel="stylesheet" type="text/css" />
@@ -31,6 +29,11 @@
             height: 60%;
         }
     </style>
+    <script src="script/jquery.js"></script>
+    <script src="script/boostrap.bundle.min.js"></script>
+    <script src="script/jquery.easing.min.js"></script>
+    <!-- Font Awesome icons (free version)-->
+    <script src="script/all.js"></script>
 </head>
 
 <body style="background-color: rgb(212, 248, 188);">
@@ -45,7 +48,7 @@
     <div style="margin-top: 7%;text-align: center;">
 
         <a class="btn btn-blue btn-x2" id="generate_btn">生成</a>
-        <a class="btn btn-primary btn-x2" id="visit_btn" onclick="visit_url()">访问</a>
+        <a class="btn btn-primary btn-x2" id="visit_btn" href="show.html">访问</a>
         <a class="btn btn-light-blue btn-x2" id="copy_btn" onclick="click_copy_url()">复制</a>
 
 
@@ -57,19 +60,15 @@
                 <option id="time4" value="7">一周</option>
                 <option id="time5" value="8">一个月</option>
             </select><br/>
-            <label id="user_def_short_link_label">自定义短连接</label> <input id="user_def_short_link" type="text">
-            <label id="generated_url_label">请访问链接：</label><span id="res"></span>
+            <label id="user_def_short_link_label">自定义id（可选）</label> <input id="user_def_short_link" type="text">
+            <label id="generated_url_label">请先点击复制后访问：</label><span id="res"></span>
         </div>
 
     </div>
 
     <div id="editor"></div>
 
-    <!-- Bootstrap core JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Third party plugin JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
     <!-- Contact form JS-->
     <script src="assets/mail/jqBootstrapValidation.js"></script>
     <script src="assets/mail/contact_me.js"></script>
@@ -128,14 +127,14 @@
         });
 
         //turn to show.html
-        function visit_url() {
-            var url = $("#res").html();
-            if (url != null && url != "") {
-                window.open(url);
-            } else {
-                alert("链接不能为空");
-            }
-        }
+        // function visit_url() {
+        //     var url = $("#res").html();
+        //     if (url != null && url != "") {
+        //         window.open(url);
+        //     } else {
+        //         alert("链接不能为空");
+        //     }
+        // }
 
         // copy url
         function click_copy_url() {
@@ -164,7 +163,7 @@
                     if(character >= '0' && character <= '9' || character >= 'a' && character <= 'z' || character >= 'A' && character <= 'Z'){
                         continue;
                     }else{
-                        alert("Error: 7个字符选自：0~9、a~z、A~Z");
+                        alert("Error: id的7个字符选自：0~9、a~z、A~Z");
                         return false;
                     }
                 }
