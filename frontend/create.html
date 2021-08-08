@@ -146,14 +146,14 @@
             document.execCommand("Copy"); // 执行浏览器复制命令
             oInput.className = 'oInput';
             oInput.style.display = 'none';
-            alert("复制成功");
+            alert("复制成功，即将跳转访问");
+            window.open('./show.html','_self');
         }
 
         // 判断用户自定义的短连接是否合法
         function user_def_short_link_check(){
             var short_url = String($("#user_def_short_link").val());
             short_url_length = short_url.length;
-            // todo 短连接校验：要么为空，要么0~9、a~z、A~Z,七个字符
             if(short_url_length == 0){
                return true;
             }else if(short_url_length == 7){
@@ -163,14 +163,13 @@
                     if(character >= '0' && character <= '9' || character >= 'a' && character <= 'z' || character >= 'A' && character <= 'Z'){
                         continue;
                     }else{
-                        alert("Error: id的7个字符选自：0~9、a~z、A~Z");
+                        alert("Error: id的7个字符选自：0~9、a~z、A~Z 组合");
                         return false;
                     }
                 }
-
                 return true;
             }
-            alert("Error: 请输入7个字符：0~9、a~z、A~Z");
+            alert("Error: id的7个字符选自：0~9、a~z、A~Z 组合");
             return false;
         }
 
