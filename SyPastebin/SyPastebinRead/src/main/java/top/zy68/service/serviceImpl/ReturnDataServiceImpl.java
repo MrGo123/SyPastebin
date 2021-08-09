@@ -72,7 +72,7 @@ public class ReturnDataServiceImpl implements ReturnDataService {
             return new ResultVO(ResultCode.SOURCE_IS_LOST, null);
         }
 
-        // 如果不是从redis获取则加入redis，默认五天过期
+        // 如果不是从redis获取则加入redis，保存至其过期或永久存储
         if (!redisSign) {
             long keepTime = (paste.getExpirationTime().getTime() - paste.getCreateTime().getTime()) / (24*60*60*1000);
             if (keepTime == 0) {
