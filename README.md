@@ -9,11 +9,12 @@ An online light Pastebin for developers.
 
 ## Main
 
-1. springboot 2.4.2
-2. maven 3.6.3
-3. mysql 8.0
-4. mongodb 4.4.3
-5. JDK 1.8
+1. springboot: 2.4.2
+2. maven: 3.6.3
+3. mysql: 8.0
+4. mongodb: 4.4.3
+5. jdk: 1.8
+6. redis: 6.2.5
 
 ## Others
 
@@ -37,6 +38,7 @@ visit: http://localhost:8080/druid/index.html
 - [x] 集成Druid连接池，监控数据库操作；
 - [x] 集成Swagger API接口文档展示；
 - [x] 增加内容安全保障：使用对称加密技术 **AES** 对内容加密保存、读取解密；
+- [x] 使用 redis 缓存，实现缓存预热，提高用户查询速度。
 
 # ToDo List
 
@@ -44,7 +46,6 @@ visit: http://localhost:8080/druid/index.html
 - [ ] 增加用户登录及其相关功能；
 - [ ] 利用websocket做实时编辑功能，用户能够开辟一个在线粘贴板，得到一个url分享出去。对方可实时查看到最新编辑。
 - [ ] 在粘贴板下增加一个评论系统，用户可实时在当前粘贴面板上评论、聊天。
-
 
 ## 前端
 - [ ] 优化前端交互，人机页面更友好；
@@ -55,7 +56,6 @@ visit: http://localhost:8080/druid/index.html
 - [ ] 服务跟踪：生成点击次数；
 - [ ] 网站用户访问数计算：布隆过滤器，对相同用户去重。
 - [ ] 从应用层面对两个数据库的操作增加事务，保证事务一致性。
-- [ ] 使用redis增加缓存，提高用户访问速度。
 - [ ] 使用Docker部署上线。
 - [ ] 部署时使用Nginx反向代理，感受多服务器处理。
 - [ ] 项目优化（包括服务逻辑、数据库索引、数据库逻辑、代码结构等）。
