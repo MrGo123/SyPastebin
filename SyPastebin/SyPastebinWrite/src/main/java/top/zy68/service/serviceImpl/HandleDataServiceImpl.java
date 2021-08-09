@@ -4,6 +4,8 @@ package top.zy68.service.serviceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import top.zy68.dao.PasteMapper;
 import top.zy68.model.Paste;
@@ -15,6 +17,7 @@ import top.zy68.utils.AESUtil;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName HandleDataServiceImpl
@@ -38,6 +41,9 @@ public class HandleDataServiceImpl implements HandleDataService {
     @Autowired
     Paste paste;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(HandleDataServiceImpl.class);
 
     /**
@@ -55,7 +61,8 @@ public class HandleDataServiceImpl implements HandleDataService {
      */
     @Override
     public String generateRecord(int saveTime, String pasteCode, String userDefinedShortLink, String clientIp) {
-
+        ValueOperations<String, Paste> valueOperations = redisTemplate.opsForValue();
+        LOGGER.info("Received paste request, saving ......");
         // 1. 根据saveTime，保存创建时间和过期时间
         Date createDate = new Date();
         paste.setCreateTime(createDate);
@@ -68,6 +75,7 @@ public class HandleDataServiceImpl implements HandleDataService {
         } else {
             shortLink = generateShortLinkService.generateShortLink(clientIp);
         }
+        LOGGER.info("Generated shorLink: " + shortLink);
         paste.setShortLink(shortLink);
 
         // 对粘贴的内容加密
@@ -77,7 +85,7 @@ public class HandleDataServiceImpl implements HandleDataService {
         } catch (NullPointerException e) {
             // 加密漏洞：如果AES加密失败返回null，那就不进行加密，明文保存。
             pasteCode = tmpPasteCode;
-            e.printStackTrace();
+            LOGGER.error(shortLink + " encrypts failed. " + e);
         }
 
         // todo：从这里开始，为了保证MongoDB和MySQL数据存储的一致性，应当增加事务处理。
@@ -90,16 +98,28 @@ public class HandleDataServiceImpl implements HandleDataService {
                 paste.setPastePath(objectId);
             }
         } catch (Exception e) {
-            LOGGER.error("插入MongoDB发送异常");
+            LOGGER.error("Saving the paste of \"" + shortLink + "\" into mongodb throws exception." + e);
         }
 
         // 4. 数据保存到MySQL中
         try {
             pasteMapper.insert(paste);
         } catch (Exception e) {
-            LOGGER.error("用户插入数据出现异常，可能失败了！！！");
+            LOGGER.error("Saving the paste of \"" + shortLink + "\" into mysql throws exception." + e);
         }
 
+        // keep the paste into redis.
+        long keepTime = (paste.getExpirationTime().getTime() - paste.getCreateTime().getTime()) / (24 * 60 * 60 * 1000);
+        if (keepTime == 0) {
+            // 永久存储
+            valueOperations.set(shortLink, paste);
+        } else {
+            // 存储至过期
+            valueOperations.set(shortLink, paste, keepTime, TimeUnit.DAYS);
+        }
+        LOGGER.info("Kept in redis.");
+
+        LOGGER.info("Succeed generated: " + shortLink);
         return shortLink;
     }
 

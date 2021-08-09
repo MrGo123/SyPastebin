@@ -23,6 +23,20 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+  redis:
+    database: 0
+    host: 39.108.141.102
+    port: 6379
+    password: admin123
+    timeout: 1000
+    connect-timeout: 500
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+
   data:
     mongodb:
       database: sypastebin

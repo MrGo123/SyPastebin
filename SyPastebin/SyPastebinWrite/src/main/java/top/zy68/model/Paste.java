@@ -3,10 +3,13 @@ package top.zy68.model;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
+
 @Component
 @ToString
-public class Paste {
+public class Paste implements Serializable {
+    private static final long serialVersionUID = -1L;
     private String shortLink;
 
     private Date expirationTime;
