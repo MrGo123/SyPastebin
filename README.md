@@ -3,8 +3,6 @@
 
 <h2>SyPastebin</h2>
 
-<hr/>
-
 A Web clipboard application developed for sharing, displaying, and storing code.
 
 一个为便于分享、展示和存储代码而开发的前后端分离、读写服务分离的 Web剪切板应用.
@@ -13,8 +11,8 @@ A Web clipboard application developed for sharing, displaying, and storing code.
 
 👇👇
 
-[**SyPastebin**](http://sustart68.cn)
 
+<a href = "http://sustart68.cn" target="_blank">SyPastebin</a>
 
 <img src="images/sypastebin.png"/>
 
