@@ -5,6 +5,10 @@ An online light Pastebin for developers.
 
 ![The Great Wall of China](images/sypastebin.png)
 
+
+<div style="text-align: center">
+<img src="images/architecture.svg"/>
+</div>
 # Usage
 
 ## Main
