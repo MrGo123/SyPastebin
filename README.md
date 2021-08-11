@@ -10,7 +10,7 @@ A Web clipboard application developed for sharing, displaying, and storing code.
 👇👇<br/>
 </p>
 
-<p align="center"><a href = "http://sustart68.cn" target="_blank">SyPastebin</a></p>
+<p align="center"><a href = "https://sustart68.cn" target="_blank">SyPastebin</a></p>
 
 
 <p align="center">
@@ -59,7 +59,8 @@ visit: http://localhost:8080/druid/index.html
 - [x] 集成 Druid 连接池，监控数据库操作；
 - [x] 集成 Swagger API 接口文档展示；
 - [x] 增加内容安全保障：使用对称加密技术 AES128 对内容加密保存、读取解密；
-- [x] 使用 Redis 缓存，实现缓存预热，提高用户查询速度。
+- [x] 使用 Redis 缓存，实现缓存预热，提高用户查询速度；
+- [x] 服务支持 https。
 
 ## Future
 
@@ -80,7 +81,7 @@ visit: http://localhost:8080/druid/index.html
 - [ ] 使用Docker部署上线。
 - [ ] 部署时使用Nginx反向代理，感受多服务器处理。
 - [ ] 项目优化（包括服务逻辑、数据库索引、数据库逻辑、代码结构等）。
-- [ ] 服务支持 https。
+
 
 有些想到再加~~~🧐🧐
 

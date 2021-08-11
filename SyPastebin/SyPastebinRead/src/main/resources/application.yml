@@ -61,3 +61,7 @@ server:
   tomcat:
     max-http-form-post-size: -1 # 取消最大post上传限制
   port: 8081
+  ssl:
+    key-store: classpath:myssl.jks
+    key-store-password: Jc31stzp
+    key-store-type: JKS
