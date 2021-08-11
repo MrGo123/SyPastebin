@@ -41,9 +41,9 @@ index</p>
 
 1. Log framework: Logback
 2. RestApi document: Swagger2  
-visit:http://localhost:8080/swagger-ui.html
+visit:http://ip:port/swagger-ui.html
 3. DatabasePool: Druid  
-visit: http://localhost:8080/druid/index.html
+visit: http://ip:port/druid/index.html
 4. Editor framework: [Ace](https://ace.c9.io/)
 
 ## Achieved
@@ -59,7 +59,7 @@ visit: http://localhost:8080/druid/index.html
 - [x] 集成 Druid 连接池，监控数据库操作；
 - [x] 集成 Swagger API 接口文档展示；
 - [x] 增加内容安全保障：使用对称加密技术 AES128 对内容加密保存、读取解密；
-- [x] 使用 Redis 缓存，实现缓存预热，提高用户查询速度；
+- [x] 使用 Redis 缓存中间件，实现缓存预热，提高用户查询速度；
 - [x] 服务支持 https。
 
 ## Future
@@ -70,18 +70,20 @@ visit: http://localhost:8080/druid/index.html
 - [ ] 在粘贴板下增加一个评论系统，用户可实时在当前粘贴面板上评论、聊天。
 
 ### 前端
-- [ ] 优化前端交互，人机页面更友好；
-- [ ] 优化前端代码，删除无用代码；
-- [ ] 研究 and 开启更多 **Ace** 插件的功能。
+- [ ] 前端人机交互优化；
+- [ ] 前端性能优化；
+- [ ] 研究 and 开启 **Ace** 插件的更多功能。
 
 ### 后端
 - [ ] 服务跟踪：生成点击次数。
 - [ ] 网站用户访问数计算：布隆过滤器，对相同用户去重。
 - [ ] 从应用层面对两个数据库的操作增加事务，保证事务一致性。
-- [ ] 使用Docker部署上线。
-- [ ] 部署时使用Nginx反向代理，感受多服务器处理。
+- [ ] 使用 Docker Compose 容器编排部署上线。
+- [ ] 部署时使用 Nginx 反向代理，感受多服务器处理。
 - [ ] 项目优化（包括服务逻辑、数据库索引、数据库逻辑、代码结构等）。
 
+### 总体
+- [ ] 性能测试
 
 有些想到再加~~~🧐🧐
 
