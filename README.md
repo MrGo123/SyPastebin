@@ -3,6 +3,15 @@
 
 <h2 align="center">SyPastebin</h2>
 
+
+<div align="center">
+
+
+![Java](https://img.shields.io/badge/Java-1.8-FE642E?style=flat&logo=java&logoColor=FE642E)![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.4.2-2EFE64?style=flat&logo=Spring%20Boot&logoColor=2EFE64)[![Author](https://img.shields.io/badge/author-@Sustart-0080FF?style=flat)](https://github.com/MrGo123) [![License](https://img.shields.io/badge/licese-Apachev2-E95420?style=flat)](./LICENSE) 
+
+</div>
+
+
 <p align="center">
 A Web clipboard application developed for sharing, displaying, and storing code.<br/>
 一个为便于分享、展示和存储代码而开发的前后端分离、读写服务分离的 Web剪切板应用.<br/>
