@@ -6,7 +6,7 @@
 
 <div align="center">
 
-![Java](https://img.shields.io/badge/Java-1.8-FE642E?style=flat&logo=java&logoColor=FE642E)&nbsp;&nbsp;![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.4.2-2EFE64?style=flat&logo=Spring%20Boot&logoColor=2EFE64)&nbsp;&nbsp;[![Author](https://img.shields.io/badge/Author-@SustartHe-0080FF?style=flat)](https://github.com/MrGo123)&nbsp;&nbsp;![Lincense](https://img.shields.io/github/license/MrGo123/SyPastebin.svg?style=flat)
+![Java](https://img.shields.io/badge/Java-1.8-FE642E?style=flat&logo=java&logoColor=FE642E)&nbsp;&nbsp;![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.4.2-2EFE64?style=flat&logo=Spring%20Boot&logoColor=2EFE64)&nbsp;&nbsp;[![Author](https://img.shields.io/badge/Author-@Sustart-0080FF?style=flat)](https://github.com/MrGo123)&nbsp;&nbsp;![Lincense](https://img.shields.io/github/license/MrGo123/SyPastebin.svg?style=flat)
 
 </div>
 
