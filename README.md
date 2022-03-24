@@ -14,11 +14,6 @@
 <p align="center">
 A Web clipboard application developed for sharing, displaying, and storing code.<br/>
 一个为便于分享、展示和存储代码而开发的前后端分离、读写服务分离的 Web剪切板应用.<br/>
-🎉 欢迎访问 🎉<br/>
-👇👇<br/>
-</p>
-
-<p align="center"><a href = "https://sustart68.cn" target="_blank">SyPastebin</a></p>
 
 
 <p align="center">
